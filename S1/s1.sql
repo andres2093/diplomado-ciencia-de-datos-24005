@@ -38,6 +38,10 @@ SELECT * FROM Pedidos WHERE (fecha_pedido BETWEEN '2023-01-01' AND '2023-12-31')
 -- Selecciona todos los usuarios cuya edad sea mayor o igual a 18 años y cuya fecha de registro sea en octubre de 
 -- cualquier año.
 SELECT * FROM Usuarios WHERE edad >= 18 AND month(fecha_registro) = 10;
-
-
+-- ///////////////// EJEMPLO 04 /////////////////
+-- Ordenamientos
+select * from Productos order by precio asc;
+select * from Productos order by precio desc;
+select * from Pedidos order by fecha_pedido desc;
+select * from Usuarios order by edad asc, fecha_registro desc;
 
