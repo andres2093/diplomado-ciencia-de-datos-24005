@@ -44,4 +44,6 @@ select * from Productos order by precio asc;
 select * from Productos order by precio desc;
 select * from Pedidos order by fecha_pedido desc;
 select * from Usuarios order by edad asc, fecha_registro desc;
+-- ///////////////// RETO 04 ///////////////// 
+select * from Detalles_Pedido order by detalle_id asc, cantidad desc, precio_unitario asc;
 
