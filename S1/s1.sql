@@ -11,3 +11,9 @@ describe Usuarios;
 describe Pedidos;
 describe Productos;
 describe Detalles_Pedido;
+-- ///////////////// EJEMPLO 02 /////////////////
+-- Mostrar solo algunas columnas de una tabla
+select nombre, correo_electronico from Usuarios;
+-- Mostrar todas las columnas de una tabla
+select * from Usuarios;
+
