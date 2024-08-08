@@ -16,4 +16,7 @@ describe Detalles_Pedido;
 select nombre, correo_electronico from Usuarios;
 -- Mostrar todas las columnas de una tabla
 select * from Usuarios;
+-- ///////////////// RETO 02 ///////////////// 
+select * from Pedidos;
+select * from Productos;
 
