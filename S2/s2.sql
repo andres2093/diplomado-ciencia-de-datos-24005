@@ -64,3 +64,17 @@ group by MONTH(fecha_registro) having AVG(edad) between 20 and 29;
 -- Días de la semana con cuatro pedidos o más.
 select DAYOFWEEK(fecha_pedido) as dia_semana, count(*) as total_pedidos from Pedidos
 group by DAYOFWEEK(fecha_pedido) having total_pedidos > 1400 order by dia_semana;
+
+-- ///////////////// RETO 03 /////////////////
+-- Pedidos donde el subtotal promedio sea mayor a 400.
+SELECT pedido_id AS pedido, AVG(subtotal) AS subtotal_promedio FROM Detalles_Pedido
+GROUP BY pedido_id HAVING subtotal_promedio > 400 ORDER BY 1;
+-- Productos donde la cantidad máxima y mínima sean de pedidos sea distinta.
+SELECT producto_id AS producto_vendido, max(cantidad) AS cantidad_maxima, min(cantidad) AS cantidad_minima
+FROM Detalles_Pedido GROUP BY producto_id HAVING cantidad_maxima <> cantidad_minima ORDER BY 1;	
+-- Años donde el número de usuarios registrados sea igual mayor a 1000.
+SELECT year(fecha_registro) AS anio_registro, COUNT(*) AS usuarios FROM Usuarios
+GROUP BY year(fecha_registro) HAVING usuarios > 1000 ORDER BY 1;
+-- Meses donde la cantidad de pedidos realizados es menor a 800.
+SELECT month(fecha_pedido) AS mes_pedido, COUNT(*) AS cantidad FROM Pedidos
+GROUP BY month(fecha_pedido) HAVING cantidad < 800 ORDER BY 1;
