@@ -28,4 +28,30 @@ SELECT COUNT(*) AS numero_pedidos FROM Pedidos WHERE user_id = 10;
 -- Precio máximo de pedidos hechos el 29 de mayo de 2023. 
 SELECT MAX(total_pedido) AS precio_máximo FROM Pedidos WHERE fecha_pedido LIKE '2023-05-29';
 
+-- ///////////////// EJEMPLO 02 /////////////////
+-- Total de pedidos realizados por cada usuario
+select user_id, COUNT(*) as total_pedidos from Pedidos group by user_id;
+-- Total de ventas por producto
+select producto_id, SUM(cantidad) as total_ventas from Detalles_Pedido group by producto_id;
+-- Promedio de edad de los usuarios por mes de registro
+select MONTH(fecha_registro) as mes_registro, ROUND(AVG(edad)) as promedio_edad from Usuarios 
+group by MONTH(fecha_registro) order by 1 asc;
+-- Cantidad de pedidos por día de la semana.
+select DAYOFWEEK(fecha_pedido) as dia_semana, count(*) as total_pedidos from Pedidos
+group by DAYOFWEEK(fecha_pedido) order by dia_semana asc;
+
+-- ///////////////// RETO 02 /////////////////
+-- Obtén el subtotal promedio por pedido.
+SELECT pedido_id AS pedido, ROUND(AVG(subtotal)) AS subtotal_promedio FROM Detalles_Pedido
+GROUP BY pedido_id ORDER BY 1;
+-- Obtén la cantidad máxima y mínima de pedidos de un producto.
+SELECT producto_id AS producto_vendido, max(cantidad) AS cantidad_maxima, min(cantidad) AS cantidad_minima
+FROM Detalles_Pedido GROUP BY producto_id ORDER BY 1;	
+-- Obtén el número de usuarios registrados por año
+SELECT year(fecha_registro) AS anio_registro, COUNT(*) AS usuarios FROM Usuarios
+GROUP BY year(fecha_registro) ORDER BY 1;
+-- Obtén la cantidad de pedidos realizados por mes
+SELECT month(fecha_pedido) AS mes_pedido, COUNT(*) AS cantidad FROM Pedidos
+GROUP BY month(fecha_pedido) ORDER BY 1;
+
 
