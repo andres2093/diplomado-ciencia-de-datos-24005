@@ -54,4 +54,13 @@ GROUP BY year(fecha_registro) ORDER BY 1;
 SELECT month(fecha_pedido) AS mes_pedido, COUNT(*) AS cantidad FROM Pedidos
 GROUP BY month(fecha_pedido) ORDER BY 1;
 
-
+-- ///////////////// EJEMPLO 03 /////////////////
+-- Total de pedidos realizados por cada usuario
+select user_id, COUNT(*) as total_pedidos from Pedidos group by user_id
+having total_pedidos > 0;
+-- Meses de registro donde el promedio de edad fue de personas en sus veintes.
+select MONTH(fecha_registro) as mes_registro, ROUND(AVG(edad)) as promedio_edad from Usuarios
+group by MONTH(fecha_registro) having AVG(edad) between 20 and 29;
+-- Días de la semana con cuatro pedidos o más.
+select DAYOFWEEK(fecha_pedido) as dia_semana, count(*) as total_pedidos from Pedidos
+group by DAYOFWEEK(fecha_pedido) having total_pedidos > 1400 order by dia_semana;
