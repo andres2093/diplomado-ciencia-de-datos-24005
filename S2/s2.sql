@@ -18,9 +18,14 @@ select AVG(edad) as promedio_edad_usuarios from Usuarios;
 SELECT SUM(subtotal) AS subtotal_pedido FROM Detalles_Pedido;
 -- Precio promedio de los productos en stock.
 SELECT AVG(precio) AS precio_promedio FROM Productos WHERE stock_disponible > 0;
+-- Precio promedio de los productos en stock. Redondeo
+SELECT ROUND(AVG(precio)) AS precio_promedio_1, ROUND(AVG(precio), 2) AS precio_promedio_2
+FROM Productos WHERE stock_disponible > 0;
 -- Número total de productos vendidos.
 SELECT SUM(cantidad) AS productos_vendidos FROM Detalles_Pedido;
 -- Número de pedidos del usuario 10.
 SELECT COUNT(*) AS numero_pedidos FROM Pedidos WHERE user_id = 10;
 -- Precio máximo de pedidos hechos el 29 de mayo de 2023. 
 SELECT MAX(total_pedido) AS precio_máximo FROM Pedidos WHERE fecha_pedido LIKE '2023-05-29';
+
+
