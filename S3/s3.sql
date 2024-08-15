@@ -16,3 +16,12 @@ select p.producto_id, p.nombre_producto, (
 -- Comprobar
 select MAX(dp.precio_unitario) as precio_unitario_maximo from Detalles_Pedido dp where dp.producto_id = 3;
 select SUM(dp.cantidad) as cantidad_total_vendida from Detalles_Pedido dp where dp.producto_id = 3;
+
+-- ///////////////// EJEMPLO 02 /////////////////
+-- Encontrar los productos cuyo promedio de solicitudes (ventas) sea mayor a 2
+select * from (
+	select producto_id, AVG(cantidad) as cantidad_promedio from Detalles_Pedido group by producto_id
+) as promedio_productos_vendidos where promedio_productos_vendidos.cantidad_promedio > 2; -- 0.194 sec / 0.00030 sec
+
+select producto_id, AVG(cantidad) as cantidad_promedio from Detalles_Pedido group by producto_id having cantidad_promedio > 2; -- 0.182 sec / 0.00043 sec
+
