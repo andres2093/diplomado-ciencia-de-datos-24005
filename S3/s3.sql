@@ -41,10 +41,8 @@ select nombre from Usuarios where user_id in (
 
 -- ///////////////// RETO 03 /////////////////
 -- Consulta que obtenga el nombre de los productos que hayan registrado compras con una cantidad de más de 5 unidades
-SELECT nombre_producto FROM Productos where producto_id in (
-	select producto_id from (
-		SELECT producto_id, COUNT(*) AS vendido FROM Detalles_Pedido GROUP BY producto_id
-	) as ventas where ventas.vendido > 5
+Select nombre_producto from Productos where producto_id in (
+	select producto_id from Detalles_Pedido where cantidad > 5
 );
 -- comprobar
-SELECT producto_id, COUNT(*) AS vendido FROM Detalles_Pedido where producto_id = 9191;
+SELECT SUM(cantidad) AS vendido FROM Detalles_Pedido where producto_id = 2007;
