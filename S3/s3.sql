@@ -32,3 +32,9 @@ SELECT * FROM (
 ) AS subconsulta WHERE subconsulta.pedidos > 3;
 -- comprobar
 select count(*) from Pedidos where fecha_pedido = '2023-11-14';
+
+-- ///////////////// EJEMPLO 03 /////////////////
+-- Obtener el nombre de los usuarios que realizaron pedidos en una fecha específica ('2024-04-15')
+select nombre from Usuarios where user_id in (
+	select user_id from Pedidos where fecha_pedido = '2024-04-15'
+);
