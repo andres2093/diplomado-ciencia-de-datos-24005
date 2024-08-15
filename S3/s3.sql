@@ -25,3 +25,10 @@ select * from (
 
 select producto_id, AVG(cantidad) as cantidad_promedio from Detalles_Pedido group by producto_id having cantidad_promedio > 2; -- 0.182 sec / 0.00043 sec
 
+-- ///////////////// RETO 02 /////////////////
+-- Usando subconsultas dentro de la cláusula FROM, obten aquellas fechas donde la cantidad de pedidos haya sido mayor a 3
+SELECT * FROM (
+	SELECT fecha_pedido, COUNT(*) AS pedidos FROM Pedidos GROUP BY fecha_pedido
+) AS subconsulta WHERE subconsulta.pedidos > 3;
+-- comprobar
+select count(*) from Pedidos where fecha_pedido = '2023-11-14';
