@@ -34,7 +34,8 @@ select u.nombre, u.apellido, p.fecha_pedido, p.total_pedido
 from Usuarios u
 LEFT JOIN Pedidos p
 	ON u.user_id = p.user_id
-    where p.fecha_pedido is null;
+    -- where p.fecha_pedido is null -- Mostrar usuario que no han realizado pedidos
+;
 
 --  -> RIGHT JOIN para analizar pedidos y productos
 select p.nombre_producto, dp.cantidad, dp.precio_unitario
