@@ -59,3 +59,15 @@ select sum(dp.subtotal) as total from Detalles_Pedido dp where dp.pedido_id in(
 	select pedido_id from Pedidos p where p.user_id = 10000
 );
 
+-- ///////////////// EJEMPLO 03 /////////////////
+-- Queremos categorizar a nuestros usuarios de acuerdo al grupo de edad. 
+select *, 'Adulto joven' as categoria
+from Usuarios where edad between 20 and 39
+UNION
+select *, 'Adulto' as categoria
+from Usuarios where edad between 40 and 59
+UNION
+select *, 'Adulto mayor' as categoria
+from Usuarios where edad > 59;
+
+
