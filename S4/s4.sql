@@ -72,6 +72,12 @@ from Usuarios where edad > 59;
 
 -- ///////////////// RETO 03 /////////////////
 -- Productos con poca venta -> Stock es mayor a 50 y menos de 5 ventas en los pedidos
+-- "FORMA SENCILLA" -> Solo retorna el id de los productos
+SELECT producto_id FROM Productos WHERE stock_disponible > 50
+UNION ALL
+SELECT producto_id FROM Detalles_Pedido WHERE cantidad < 5;
+
+-- "FORMA COMPLEJA" -> Muestra todos los campos de productos
 SELECT * FROM Productos WHERE stock_disponible > 50
 UNION ALL
 SELECT p.* FROM Productos p 
