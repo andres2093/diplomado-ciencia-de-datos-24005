@@ -51,8 +51,7 @@ LEFT JOIN Pedidos p
 LEFT JOIN Detalles_Pedido dp 
   ON p.pedido_id = dp.pedido_id
   -- where u.nombre = "Nombre10000" -- Comprobar
-GROUP BY nombre,
-		fecha_pedido;
+GROUP BY u.nombre, p.fecha_pedido;
 -- Comprobar $362.61
 select sum(dp.subtotal) as total from Detalles_Pedido dp where dp.pedido_id in(
 	select pedido_id from Pedidos p where p.user_id = 10000
