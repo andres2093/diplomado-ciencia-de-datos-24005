@@ -44,14 +44,16 @@ RIGHT JOIN Detalles_Pedido dp
 	ON p.producto_id = dp.producto_id;
 
 -- ///////////////// RETO 02 /////////////////
-SELECT u.nombre, p.fecha_pedido, SUM(dp.cantidad) AS cantidad, SUM(dp.subtotal) AS subtotal
+SELECT u.nombre, p.fecha_pedido, SUM(dp.cantidad) AS cantidad, SUM(dp.subtotal) AS subtotal, pr.nombre_producto
 FROM Usuarios u
 LEFT JOIN Pedidos p
   ON u.user_id = p.user_id
 LEFT JOIN Detalles_Pedido dp 
   ON p.pedido_id = dp.pedido_id
+LEFT JOIN Productos pr
+  ON dp.producto_id = pr.producto_id
   -- where u.nombre = "Nombre10000" -- Comprobar
-GROUP BY u.nombre, p.fecha_pedido;
+GROUP BY u.nombre, p.fecha_pedido, pr.nombre_producto;
 -- Comprobar $362.61
 select sum(dp.subtotal) as total from Detalles_Pedido dp where dp.pedido_id in(
 	select pedido_id from Pedidos p where p.user_id = 10000
