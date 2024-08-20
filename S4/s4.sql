@@ -70,4 +70,16 @@ UNION
 select *, 'Adulto mayor' as categoria
 from Usuarios where edad > 59;
 
+-- ///////////////// RETO 03 /////////////////
+-- Productos con poca venta -> Stock es mayor a 50 y menos de 5 ventas en los pedidos
+SELECT * FROM Productos WHERE stock_disponible > 50
+UNION ALL
+SELECT p.* FROM Productos p 
+JOIN (SELECT producto_id, SUM(cantidad) ventas
+FROM Detalles_Pedido dp
+GROUP BY dp.producto_id
+HAVING ventas < 5) s
+  ON p.producto_id = s.producto_id;
+-- comprobar 9960
+
 
