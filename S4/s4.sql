@@ -74,7 +74,7 @@ from Usuarios where edad > 59;
 -- Productos con poca venta -> Stock es mayor a 50 y menos de 5 ventas en los pedidos
 -- "FORMA SENCILLA" -> Solo retorna el id de los productos
 SELECT producto_id FROM Productos WHERE stock_disponible > 50
-UNION ALL
+UNION
 SELECT producto_id FROM Detalles_Pedido WHERE cantidad < 5;
 
 -- "FORMA COMPLEJA" -> Muestra todos los campos de productos
@@ -88,4 +88,9 @@ HAVING ventas < 5) s
   ON p.producto_id = s.producto_id;
 -- comprobar 9960
 
+-- ///////////////// EJEMPLO 04 /////////////////alter
+-- Genera todas las posibles combinaciones entre usuarios y productos
+select u.nombre, p.nombre_producto -- count(*)
+from Usuarios u
+CROSS JOIN Productos p;
 
