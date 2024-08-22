@@ -70,9 +70,47 @@ CREATE TABLE Examenes (
    calificacion DOUBLE,
    FOREIGN KEY (matricula) REFERENCES Alumnos(matricula)
 );
+-- ///////////////// RETO 03 /////////////////
 -- Consultar usuarios
 SELECT * FROM Alumnos;
 SELECT * FROM Tareas;
 SELECT * FROM Examenes;
-
+-- ///////////////// RETO 04 /////////////////
+-- Necesitamos tener los datos de los alumnos, las tareas y exámenes en una sola tabla
+select * from Alumnos a
+join Tareas t on a.matricula = t.matricula
+join Examenes e on a.matricula = e.matricula;
+-- Mostrar la info como estaba en el excel sin promedio
+SELECT a.matricula, a.nombre, a.apellido,
+	SUM(CASE WHEN e.numero_examen = 1 THEN e.calificacion ELSE 0 END) AS examen_1,
+	SUM(CASE WHEN e.numero_examen = 2 THEN e.calificacion ELSE 0 END) AS examen_2,
+	SUM(CASE WHEN t.numero_tarea = 1 THEN t.calificacion ELSE 0 END) AS tarea_1,
+	SUM(CASE WHEN t.numero_tarea = 2 THEN t.calificacion ELSE 0 END) AS tarea_2
+FROM Alumnos a
+JOIN Tareas t ON a.matricula = t.matricula
+JOIN Examenes e ON a.matricula = e.matricula
+GROUP BY a.matricula, a.nombre, a.apellido;
+-- Mostrar la info como estaba en el excel con promedios
+SELECT tareas.matricula, tareas.nombre, tareas.apellido, examen_1, examen_2,
+      (examen_1 + examen_2) / 2 AS promedio_examenes,
+      tarea_1,tarea_2,
+      (tarea_1 + tarea_2) / 2 AS promedio_tareas,
+      ((examen_1 + examen_2) / 2)*0.6 + ((tarea_1 + tarea_2) / 2 ) * 0.4 AS promedio_final
+FROM (
+	SELECT a.matricula, a.nombre, a.apellido,
+		  SUM(CASE WHEN t.numero_tarea = 1 THEN t.calificacion ELSE 0 END) AS tarea_1,
+		  SUM(CASE WHEN t.numero_tarea = 2 THEN t.calificacion ELSE 0 END) AS tarea_2
+	FROM Alumnos a
+	JOIN Tareas t ON a.matricula = t.matricula
+	GROUP BY a.matricula, a.nombre, a.apellido
+) AS tareas
+JOIN (
+	SELECT a.matricula, a.nombre, a.apellido,
+		  SUM(CASE WHEN e.numero_examen = 1 THEN e.calificacion ELSE 0 END) AS examen_1,
+		  SUM(CASE WHEN e.numero_examen = 2 THEN e.calificacion ELSE 0 END) AS examen_2
+	FROM Alumnos a
+	JOIN Examenes e ON a.matricula = e.matricula
+	GROUP BY a.matricula, a.nombre, a.apellido
+) AS examenes ON tareas.matricula = examenes.matricula
+ORDER BY tareas.matricula;
 
