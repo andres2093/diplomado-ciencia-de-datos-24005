@@ -70,5 +70,9 @@ CREATE TABLE Examenes (
    calificacion DOUBLE,
    FOREIGN KEY (matricula) REFERENCES Alumnos(matricula)
 );
+-- Consultar usuarios
+SELECT * FROM Alumnos;
+SELECT * FROM Tareas;
+SELECT * FROM Examenes;
 
 
